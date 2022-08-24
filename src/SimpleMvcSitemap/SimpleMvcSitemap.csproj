@@ -5,10 +5,10 @@
     <TargetFramework>netstandard1.6</TargetFramework>
     <IncludeSymbols>true</IncludeSymbols>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Authors>Ufuk Hacıoğulları</Authors>
-    <Description>A minimalist library for creating sitemap files inside ASP.NET Core applications.</Description>
+    <Authors>Benjamin Michaelis, Ufuk Hacıoğulları</Authors>
+    <Description>A minimalist library for creating sitemap files inside ASP.NET Core applications and physical .XML files.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/uhaciogullari/SimpleMvcSitemap</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/BenjaminMichaelis/SimpleMvcSitemap</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

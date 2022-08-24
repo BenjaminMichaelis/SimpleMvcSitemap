@@ -156,7 +156,7 @@ namespace SimpleMvcSitemap.Tests
         public void Serialize_BasicStyleMap_FileExists()
         {
             string filePath = "myownstylemap.xml";
-            string result = serializer.Serialize(testDataBuilder.CreateSitemapWithSingleStyleSheet(), filePath);
+            string result = serializer.Serialize(testDataBuilder.CreateSitemapWithSingleStyleSheet(), filePath, readable: true);
             Assert.NotEmpty(result);
             Assert.True(System.IO.File.Exists(filePath));
         }
@@ -165,7 +165,7 @@ namespace SimpleMvcSitemap.Tests
         public void Serialize_HugeSitemap_FileExists()
         {
             string filePath = "myownstylemap.xml";
-            string result = serializer.Serialize(testDataBuilder.CreateHugeSitemap(), filePath);
+            string result = serializer.Serialize(testDataBuilder.CreateHugeSitemap(), filePath, readable: true);
             Assert.NotEmpty(result);
             Assert.True(System.IO.File.Exists(filePath));
         }

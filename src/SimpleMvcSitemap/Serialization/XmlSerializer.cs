@@ -20,10 +20,10 @@ namespace SimpleMvcSitemap.Serialization
             xmlProcessingInstructionHandler = new XmlProcessingInstructionHandler();
         }
 
-        public string Serialize<T>(T data, string fileLocation)
+        public string Serialize<T>(T data, string fileLocation , bool readable)
         {
             StringWriter stringWriter = new StringWriterWithEncoding(Encoding.UTF8);
-            SerializeToStream(data, settings => XmlWriter.Create(stringWriter, settings));
+            SerializeToStream(data, settings => XmlWriter.Create(stringWriter, settings), readable);
             File.WriteAllText(fileLocation, stringWriter.ToString());
             return stringWriter.ToString();
         }
@@ -35,24 +35,29 @@ namespace SimpleMvcSitemap.Serialization
             return stringWriter.ToString();
         }
 
-        public void SerializeToStream<T>(T data, Stream stream)
+        public void SerializeToStream<T>(T data, Stream stream, bool readable = false)
         {
-            SerializeToStream(data, settings => XmlWriter.Create(stream, settings));
+            SerializeToStream(data, settings => XmlWriter.Create(stream, settings), readable);
         }
 
-        private void SerializeToStream<T>(T data, Func<XmlWriterSettings, XmlWriter> createXmlWriter)
+        private void SerializeToStream<T>(T data, Func<XmlWriterSettings, XmlWriter> createXmlWriter, bool readable = false)
         {
             IXmlNamespaceProvider namespaceProvider = data as IXmlNamespaceProvider;
             IEnumerable<string> namespaces = namespaceProvider != null ? namespaceProvider.GetNamespaces() : Enumerable.Empty<string>();
             XmlSerializerNamespaces xmlSerializerNamespaces = xmlNamespaceBuilder.Create(namespaces);
 
             var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
-
             XmlWriterSettings xmlWriterSettings = new XmlWriterSettings
             {
                 Encoding = Encoding.UTF8,
                 NamespaceHandling = NamespaceHandling.OmitDuplicates
             };
+            if (readable)
+            {
+                xmlWriterSettings.Indent = true;
+                xmlWriterSettings.NewLineChars = Environment.NewLine;
+                xmlWriterSettings.NewLineOnAttributes = true;
+            }
 
             using (XmlWriter writer = createXmlWriter(xmlWriterSettings))
             {

@@ -26,7 +26,7 @@ namespace SimpleMvcSitemap
             this.baseUrlProvider = baseUrlProvider;
         }
 
-        internal XmlResult(T data, IBaseUrlProvider baseUrlProvider, string fileLocation) : this(data, new UrlValidator(new ReflectionHelper()))
+        internal XmlResult(T data, IBaseUrlProvider baseUrlProvider, string fileLocation, bool readable = false) : this(data, new UrlValidator(new ReflectionHelper()))
         {
             this.baseUrlProvider = baseUrlProvider;
         }
@@ -42,13 +42,13 @@ namespace SimpleMvcSitemap
 
             await base.ExecuteResultAsync(context);
         }
-        public async Task ExecuteResultAsync(ActionContext context, string fileLocation)
+        public async Task ExecuteResultAsync(ActionContext context, string fileLocation, bool readable)
         {
             urlValidator.ValidateUrls(data, baseUrlProvider ?? new BaseUrlProvider(context.HttpContext.Request));
 
             var response = context.HttpContext.Response;
             response.ContentType = "application/xml";
-            await response.WriteAsync(new XmlSerializer().Serialize(data, fileLocation), Encoding.UTF8);
+            await response.WriteAsync(new XmlSerializer().Serialize(data, fileLocation, readable), Encoding.UTF8);
 
             await base.ExecuteResultAsync(context);
         }
