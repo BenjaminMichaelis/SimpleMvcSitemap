@@ -38,6 +38,17 @@ namespace SimpleMvcSitemap
             return new XmlResult<SitemapModel>(sitemapModel, baseUrlProvider);
         }
 
+        /// <inheritDoc/>
+        public ActionResult CreateSitemap(SitemapModel sitemapModel, string fileLocation)
+        {
+            if (sitemapModel == null)
+            {
+                throw new ArgumentNullException(nameof(sitemapModel));
+            }
+
+            return new XmlResult<SitemapModel>(sitemapModel, baseUrlProvider, fileLocation);
+        }
+
 
         /// <inheritDoc/>
         public ActionResult CreateSitemapIndex(SitemapIndexModel sitemapIndexModel)

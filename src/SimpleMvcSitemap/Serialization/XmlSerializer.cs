@@ -20,6 +20,14 @@ namespace SimpleMvcSitemap.Serialization
             xmlProcessingInstructionHandler = new XmlProcessingInstructionHandler();
         }
 
+        public string Serialize<T>(T data, string fileLocation)
+        {
+            StringWriter stringWriter = new StringWriterWithEncoding(Encoding.UTF8);
+            SerializeToStream(data, settings => XmlWriter.Create(stringWriter, settings));
+            File.WriteAllText(fileLocation, stringWriter.ToString());
+            return stringWriter.ToString();
+        }
+
         public string Serialize<T>(T data)
         {
             StringWriter stringWriter = new StringWriterWithEncoding(Encoding.UTF8);

@@ -152,6 +152,24 @@ namespace SimpleMvcSitemap.Tests
             result.Should().BeXmlEquivalent("sitemap-with stylesheets.xml");
         }
 
+        [Fact]
+        public void Serialize_BasicStyleMap_FileExists()
+        {
+            string filePath = "myownstylemap.xml";
+            string result = serializer.Serialize(testDataBuilder.CreateSitemapWithSingleStyleSheet(), filePath);
+            Assert.NotEmpty(result);
+            Assert.True(System.IO.File.Exists(filePath));
+        }
+
+        [Fact]
+        public void Serialize_HugeSitemap_FileExists()
+        {
+            string filePath = "myownstylemap.xml";
+            string result = serializer.Serialize(testDataBuilder.CreateHugeSitemap(), filePath);
+            Assert.NotEmpty(result);
+            Assert.True(System.IO.File.Exists(filePath));
+        }
+
         private string SerializeSitemap(SitemapNode sitemapNode)
         {
             return serializer.Serialize(new SitemapModel(new List<SitemapNode> { sitemapNode }));
