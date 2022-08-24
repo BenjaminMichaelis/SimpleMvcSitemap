@@ -25,6 +25,7 @@ jobs:
       with:
         dotnet-version: | 
             6.x
+            3.1.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Set Version
