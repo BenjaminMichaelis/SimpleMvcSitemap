@@ -1,12 +1,18 @@
-SimpleMvcSitemap
+DotnetSitemapGenerator
 =============
-A minimalist library for creating sitemap files inside ASP.NET Core applications.
 
-SimpleMvcSitemap lets you create [sitemap files](http://www.sitemaps.org/protocol.html) inside action methods without any configuration. It also supports generating [sitemap index files](http://www.sitemaps.org/protocol.html#index). Since you are using regular action methods you can take advantage of caching and routing available in the framework.
+A minimalist library for creating sitemap files inside ASP.NET Core applications and generating sitemap.xml files.
+
+DotnetSitemapGenerator lets you create [sitemap files](http://www.sitemaps.org/protocol.html) inside action methods without any configuration. It also supports generating [sitemap index files](http://www.sitemaps.org/protocol.html#index). Since you are using regular action methods you can take advantage of caching and routing available in the framework.
+
+## Advantages of DotnetSitemapGenerator
+This builds upon SimpleMvcSitemap by uhaciogullari by allowing the generator to save to a physical .xml file directly with additional testing.
+Also this project is being actively developed and used in production applications, and upgraded to use updated dotnet features and language versions.
 
 ## Table of contents
  - [Installation](#installation)
  - [Examples](#examples)
+ - [Serializing Sitemap to a File](#serializing-to-a-file)
  - [Sitemap Index Files](#sitemap-index-files)
  - [DateTime Format](#datetime-format)
  - [Google Sitemap Extensions](#google-sitemap-extensions)
@@ -22,15 +28,11 @@ SimpleMvcSitemap lets you create [sitemap files](http://www.sitemaps.org/protoco
 
 ## <a id="installation">Installation</a>
 
-Install the [NuGet package](https://www.nuget.org/packages/SimpleMvcSitemap/) on your MVC project.
-
-### .NET Framework
-
-Support for .NET Framework and ASP.NET MVC has been dropped by version 4. Use [version 3](https://github.com/uhaciogullari/SimpleMvcSitemap/tree/v3) if you need to support this scenario.
+Install the [NuGet package](https://www.nuget.org/packages/DotnetSitemapGenerator/) on your MVC project.
 
 ## <a id="examples">Examples</a>
 
-You can use SitemapProvider class to create sitemap files inside any action method. You don't even have to provide absolute URLs, SimpleMvcSitemap can generate them from relative URLs. Here's an example:
+You can use SitemapProvider class to create sitemap files inside any action method. You don't even have to provide absolute URLs, DotnetSitemapGenerator can generate them from relative URLs. Here's an example:
 ```csharp
 public class SitemapController : Controller
 {
@@ -56,7 +58,20 @@ new SitemapNode(Url.Action("Index", "Home"))
     LastModificationDate = DateTime.UtcNow.ToLocalTime(),
     Priority = 0.8M
 }
-```	
+```
+## <a id="serializing-to-a-file">Serializing Sitemap to a File</a>
+
+To serialize a sitemap directly to a file this is done slightly differently than using the controller as you use the XMLSerializer directly.
+
+```csharp
+IXmlSerializer sitemapProvider = new XmlSerializer(); // Instantiate a new serializer
+List<SitemapNode> nodes = new(); // Add in your nodes here
+
+// second parameter xmlSavePath is the path to where you want to save your file, often "sitemap.xml"
+// third parameter (true in this case) is used to mark whether the outputed xml file should be 
+// formatted in a way that it is easily readable by human eyes which is helpful with visual validation
+sitemapProvider.Serialize(new SitemapModel(nodes), xmlSavePath, true);
+```
 
 ## <a id="sitemap-index-files">Sitemap Index Files</a>
 
@@ -72,7 +87,7 @@ List<SitemapIndexNode> sitemapIndexNodes = new List<SitemapIndexNode>
 return new SitemapProvider().CreateSitemapIndex(new SitemapIndexModel(sitemapIndexNodes));
 ```
 
-If you are dealing with dynamic data and you are retrieving the data using a LINQ provider, SimpleMvcSitemap can handle the paging for you. A regular sitemap will be created if you don't have more nodes than the sitemap size.
+If you are dealing with dynamic data and you are retrieving the data using a LINQ provider, DotnetSitemapGenerator can handle the paging for you. A regular sitemap will be created if you don't have more nodes than the sitemap size.
 
 ![Generating sitemap index files](http://i.imgur.com/ZJ7UNkM.png)
 
@@ -122,7 +137,7 @@ You can use [Google's sitemap extensions](https://support.google.com/webmasters/
 ### <a id="images">Images</a>
 
 ```csharp
-using SimpleMvcSitemap.Images;
+using DotnetSitemapGenerator.Images;
 
 new SitemapNode(Url.Action("Display", "Product"))
 {
@@ -139,7 +154,7 @@ new SitemapNode(Url.Action("Display", "Product"))
 By version 4, multiple videos are supported. Start using Videos property if you are upgrading from v3 to v4.
 
 ```csharp
-using SimpleMvcSitemap.Videos;
+using DotnetSitemapGenerator.Videos;
 
 new SitemapNode("http://www.example.com/videos/some_video_landing_page.html")
 {
@@ -156,7 +171,7 @@ new SitemapNode("http://www.example.com/videos/some_video_landing_page.html")
 ### <a id="news">News</a>
 
 ```csharp
-using SimpleMvcSitemap.News;
+using DotnetSitemapGenerator.News;
 
 new SitemapNode("http://www.example.org/business/article55.html")
 {
@@ -169,7 +184,7 @@ new SitemapNode("http://www.example.org/business/article55.html")
 ### <a id="translations">Alternate language pages</a>
 
 ```csharp
-using SimpleMvcSitemap.Translations;
+using DotnetSitemapGenerator.Translations;
 
 new SitemapNode("abc")
 {
@@ -183,10 +198,10 @@ new SitemapNode("abc")
 
 ## <a id="style-sheets">XSL Style Sheets</a>
 
-SimpleMvcSitemap supports XSL style sheets by version 3. Keep in mind that XML stylesheets are subjected to the [same origin](https://en.wikipedia.org/wiki/Same-origin_policy) checks.
+DotnetSitemapGenerator supports XSL style sheets by version 3. Keep in mind that XML stylesheets are subjected to the [same origin](https://en.wikipedia.org/wiki/Same-origin_policy) checks.
 
 ```csharp
-using SimpleMvcSitemap.StyleSheets;
+using DotnetSitemapGenerator.StyleSheets;
 
 new SitemapModel(new List<SitemapNode> { new SitemapNode("abc") })
 {
@@ -200,7 +215,7 @@ You can see how you can utilize multiple XSL style sheets in [this tutorial](htt
 
 ## <a id="base-url">Custom Base URL</a>
 
-SimpleMvcSitemap can generate absolute URLs from the relative URLs using the HTTP request context. If you want to customize this behaviour, you can implement IBaseUrlProvider interface and pass it to the SitemapProvider class.
+DotnetSitemapGenerator can generate absolute URLs from the relative URLs using the HTTP request context. If you want to customize this behaviour, you can implement IBaseUrlProvider interface and pass it to the SitemapProvider class.
 
 ```csharp
 public class BaseUrlProvider : IBaseUrlProvider
@@ -231,4 +246,4 @@ public class SitemapController : Controller
 
 ## <a id="license">License</a>
 
-SimpleMvcSitemap is licensed under [MIT License](http://opensource.org/licenses/MIT "Read more about the MIT license form"). Refer to license file for more information.
+DotnetSitemapGenerator is licensed under [MIT License](http://opensource.org/licenses/MIT "Read more about the MIT license form"). Refer to license file for more information.
