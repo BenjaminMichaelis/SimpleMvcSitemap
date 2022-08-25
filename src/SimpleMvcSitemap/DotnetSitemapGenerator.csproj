@@ -10,7 +10,7 @@
     <Description>A minimalist library for creating sitemap files inside ASP.NET Core applications and physical .XML files.</Description>
 	<PackageTags>Sitemap, XML, SitemapGenerator, Sitemap.xml</PackageTags>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/BenjaminMichaelis/SimpleMvcSitemap</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/BenjaminMichaelis/DotnetSitemapGenerator</PackageProjectUrl>
 	<PackageReadmeFile>..\..\README.md</PackageReadmeFile>
   </PropertyGroup>
 

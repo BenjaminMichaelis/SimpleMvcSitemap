@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\SimpleMvcSitemap\SimpleMvcSitemap.csproj" />
     <ProjectReference Include="..\SimpleMvcSitemap.Tests\SimpleMvcSitemap.Tests.csproj" />
   </ItemGroup>
 

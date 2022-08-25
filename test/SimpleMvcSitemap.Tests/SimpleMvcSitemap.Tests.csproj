@@ -13,7 +13,6 @@
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
-    <ProjectReference Include="..\..\src\SimpleMvcSitemap\SimpleMvcSitemap.csproj" />
 
     <None Update="xunit.runner.json;Samples\*.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

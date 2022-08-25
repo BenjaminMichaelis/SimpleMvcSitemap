@@ -46,13 +46,13 @@ jobs:
       run: dotnet test --no-build --configuration Release --verbosity normal
     - name: Pack
       if: startsWith(github.ref, 'refs/tags/v')
-      run: dotnet pack -p:PackageVersion=${{ env.nugetVersion }} --configuration Release -o ${{env.DOTNET_ROOT}}/SimpleMvcSitemap --no-build 
+      run: dotnet pack -p:PackageVersion=${{ env.nugetVersion }} --configuration Release -o ${{env.DOTNET_ROOT}}/DotnetSitemapGenerator --no-build 
     - name: Upload Artifacts
       if: startsWith(github.ref, 'refs/tags/v')
       uses: actions/upload-artifact@v2
       with:
         name: NuGet
-        path: ${{env.DOTNET_ROOT}}/SimpleMvcSitemap
+        path: ${{env.DOTNET_ROOT}}/DotnetSitemapGenerator
       
   deploy:
     if: startsWith(github.ref, 'refs/tags/v')
@@ -69,10 +69,10 @@ jobs:
         run: |
           $tagVersion = "${{ github.ref }}".substring(11)
           echo "tagVersion=$tagVersion" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          dotnet nuget push SimpleMvcSitemap.$tagVersion.nupkg --source https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          dotnet nuget push DotnetSitemapGenerator.$tagVersion.nupkg --source https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
       - name: Upload nupkg to Releases
         uses: softprops/action-gh-release@v1
         with:
           fail_on_unmatched_files: true
           generate_release_notes: true
-          files: SimpleMvcSitemap.${{ env.tagVersion }}.nupkg
+          files: DotnetSitemapGenerator.${{ env.tagVersion }}.nupkg
