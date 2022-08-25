@@ -2,7 +2,7 @@
 
 namespace SimpleMvcSitemap.Serialization
 {
-    interface IXmlSerializer
+    public interface IXmlSerializer
     {
         string Serialize<T>(T data);
         string Serialize<T>(T data, string fileLocation, bool readable);

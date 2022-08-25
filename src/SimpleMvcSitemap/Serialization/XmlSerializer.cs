@@ -9,7 +9,7 @@ using SimpleMvcSitemap.StyleSheets;
 
 namespace SimpleMvcSitemap.Serialization
 {
-    class XmlSerializer : IXmlSerializer
+    public class XmlSerializer : IXmlSerializer
     {
         private readonly IXmlNamespaceBuilder xmlNamespaceBuilder;
         private readonly XmlProcessingInstructionHandler xmlProcessingInstructionHandler;
