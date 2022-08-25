@@ -1,3 +1,6 @@
+[![Nuget](https://img.shields.io/nuget/v/DotnetSitemapGenerator)](https://www.nuget.org/packages/DotnetSitemapGenerator/)
+[![Build, Test, and Deploy](https://github.com/BenjaminMichaelis/DotnetSitemapGenerator/actions/workflows/build-test-deploy.yml/badge.svg?branch=main&event=push)](https://github.com/BenjaminMichaelis/DotnetSitemapGenerator/actions/workflows/build-test-deploy.yml)
+
 DotnetSitemapGenerator
 =============
 
@@ -65,7 +68,16 @@ To serialize a sitemap directly to a file this is done slightly differently than
 
 ```csharp
 IXmlSerializer sitemapProvider = new XmlSerializer(); // Instantiate a new serializer
-List<SitemapNode> nodes = new(); // Add in your nodes here
+
+// Add all your mappings to this list
+List<SitemapNode> nodes = new() { 
+    new($"https://yoursite.com/homepage") 
+    { 
+        LastModificationDate = newDateTime.ToLocalTime(), 
+        ChangeFrequency = ChangeFrequency.Daily, 
+        Priority = 1.0M 
+    }
+};
 
 // second parameter xmlSavePath is the path to where you want to save your file, often "sitemap.xml"
 // third parameter (true in this case) is used to mark whether the outputed xml file should be 
