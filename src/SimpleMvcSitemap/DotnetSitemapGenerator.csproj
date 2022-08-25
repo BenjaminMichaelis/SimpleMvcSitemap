@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Version>1.0.0</Version>
@@ -11,15 +11,7 @@
 	<PackageTags>Sitemap, XML, SitemapGenerator, Sitemap.xml</PackageTags>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/BenjaminMichaelis/DotnetSitemapGenerator</PackageProjectUrl>
-	<PackageReadmeFile>..\..\README.md</PackageReadmeFile>
   </PropertyGroup>
-
-	<ItemGroup>
-		<None Include="..\..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>..\..\</PackagePath>
-		</None>
-	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.0.3" />
