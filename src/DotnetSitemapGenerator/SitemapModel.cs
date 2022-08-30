@@ -29,7 +29,7 @@ namespace DotnetSitemapGenerator
         [XmlElement("url")]
         public List<SitemapNode> Nodes { get; }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public IEnumerable<string> GetNamespaces()
         {
             if (Nodes == null)
@@ -59,7 +59,7 @@ namespace DotnetSitemapGenerator
         }
 
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         [XmlIgnore]
         public List<XmlStyleSheet> StyleSheets { get; set; }
     }

@@ -9,17 +9,30 @@ using DotnetSitemapGenerator.StyleSheets;
 
 namespace DotnetSitemapGenerator.Serialization
 {
+    /// <inheritdoc/>
     public class XmlSerializer : IXmlSerializer
     {
         private readonly IXmlNamespaceBuilder xmlNamespaceBuilder;
         private readonly XmlProcessingInstructionHandler xmlProcessingInstructionHandler;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlSerializer"/> class.
+        /// </summary>
         public XmlSerializer()
         {
             xmlNamespaceBuilder = new XmlNamespaceBuilder();
             xmlProcessingInstructionHandler = new XmlProcessingInstructionHandler();
         }
 
+        /// <inheritdoc/>
+        public string Serialize<T>(T data)
+        {
+            StringWriter stringWriter = new StringWriterWithEncoding(Encoding.UTF8);
+            SerializeToStream(data, settings => XmlWriter.Create(stringWriter, settings));
+            return stringWriter.ToString();
+        }
+
+        /// <inheritdoc/>
         public string Serialize<T>(T data, string fileLocation , bool readable)
         {
             StringWriter stringWriter = new StringWriterWithEncoding(Encoding.UTF8);
@@ -28,13 +41,7 @@ namespace DotnetSitemapGenerator.Serialization
             return stringWriter.ToString();
         }
 
-        public string Serialize<T>(T data)
-        {
-            StringWriter stringWriter = new StringWriterWithEncoding(Encoding.UTF8);
-            SerializeToStream(data, settings => XmlWriter.Create(stringWriter, settings));
-            return stringWriter.ToString();
-        }
-
+        /// <inheritdoc/>
         public void SerializeToStream<T>(T data, Stream stream, bool readable = false)
         {
             SerializeToStream(data, settings => XmlWriter.Create(stream, settings), readable);

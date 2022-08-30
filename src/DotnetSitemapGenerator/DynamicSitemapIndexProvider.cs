@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetSitemapGenerator
 {
-    /// <inheritDoc/>
+    /// <inheritdoc/>
     public class DynamicSitemapIndexProvider : IDynamicSitemapIndexProvider
     {
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public ActionResult CreateSitemapIndex<T>(ISitemapProvider sitemapProvider, ISitemapIndexConfiguration<T> sitemapIndexConfiguration)
         {
             if (sitemapProvider == null)

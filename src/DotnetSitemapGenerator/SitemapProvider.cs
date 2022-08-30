@@ -5,7 +5,7 @@ using DotnetSitemapGenerator.Routing;
 
 namespace DotnetSitemapGenerator
 {
-    /// <inheritDoc/>
+    /// <inheritdoc/>
     public class SitemapProvider : ISitemapProvider
     {
         private readonly IBaseUrlProvider baseUrlProvider;
@@ -27,7 +27,7 @@ namespace DotnetSitemapGenerator
         }
 
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public ActionResult CreateSitemap(SitemapModel sitemapModel)
         {
             if (sitemapModel == null)
@@ -38,7 +38,7 @@ namespace DotnetSitemapGenerator
             return new XmlResult<SitemapModel>(sitemapModel, baseUrlProvider);
         }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public ActionResult CreateSitemap(SitemapModel sitemapModel, string fileLocation)
         {
             if (sitemapModel == null)
@@ -50,7 +50,7 @@ namespace DotnetSitemapGenerator
         }
 
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public ActionResult CreateSitemapIndex(SitemapIndexModel sitemapIndexModel)
         {
             if (sitemapIndexModel == null)

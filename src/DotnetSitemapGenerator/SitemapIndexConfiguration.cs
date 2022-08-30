@@ -4,7 +4,7 @@ using DotnetSitemapGenerator.StyleSheets;
 
 namespace DotnetSitemapGenerator
 {
-    /// <inheritDoc/>
+    /// <inheritdoc/>
     public abstract class SitemapIndexConfiguration<T> : ISitemapIndexConfiguration<T>
     {
         /// <summary>
@@ -19,28 +19,28 @@ namespace DotnetSitemapGenerator
             Size = 50000;
         }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public IQueryable<T> DataSource { get; }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public int? CurrentPage { get; }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public int Size { get; protected set; }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public abstract SitemapIndexNode CreateSitemapIndexNode(int currentPage);
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public abstract SitemapNode CreateNode(T source);
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public List<XmlStyleSheet> SitemapStyleSheets { get; protected set; }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public List<XmlStyleSheet> SitemapIndexStyleSheets { get; protected set; }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         public bool UseReverseOrderingForSitemapIndexNodes { get; protected set; }
     }
 }

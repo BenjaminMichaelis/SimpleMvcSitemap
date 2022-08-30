@@ -28,7 +28,7 @@ namespace DotnetSitemapGenerator
         [XmlElement("sitemap")]
         public List<SitemapIndexNode> Nodes { get; }
 
-        /// <inheritDoc/>
+        /// <inheritdoc/>
         [XmlIgnore]
         public List<XmlStyleSheet> StyleSheets { get; set; }
     }
