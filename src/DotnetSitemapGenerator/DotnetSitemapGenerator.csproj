@@ -5,6 +5,7 @@
 		<OutputType>Library</OutputType>
 		<TargetFramework>netstandard1.6</TargetFramework>
 		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Authors>Benjamin Michaelis, Ufuk Hacıoğulları</Authors>
 		<Description>A minimalist library for creating sitemap files inside ASP.NET Core applications and physical .XML files.</Description>
