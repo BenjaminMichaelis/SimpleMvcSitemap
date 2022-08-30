@@ -12,6 +12,10 @@
 		<PackageTags>Sitemap, XML, SitemapGenerator, Sitemap.xml</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/BenjaminMichaelis/DotnetSitemapGenerator</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/BenjaminMichaelis/DotnetSitemapGenerator</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<Deterministic>true</Deterministic>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Xml.XmlSerializer" Version="4.0.11" />
