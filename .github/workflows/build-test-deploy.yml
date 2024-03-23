@@ -16,6 +16,16 @@ env:
   baseVersion: 1.0.0
 
 jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: fastify/github-action-merge-dependabot@v3.10.1  
+        with:
+          use-github-auto-merge: true
+      
   build-and-test:
     runs-on: windows-latest
     steps:
